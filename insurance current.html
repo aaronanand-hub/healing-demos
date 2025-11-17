@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insurance Quick Claim (Current)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e5f4fb; /* Light background for trust */
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8 min-h-screen">
+    <div id="app" class="max-w-xl mx-auto bg-white shadow-2xl rounded-2xl p-6 md:p-10">
+        <header class="text-center mb-10 border-b pb-4">
+            <h1 class="text-3xl font-extrabold text-cyan-700">Quick Claim Submission</h1>
+            <p class="text-gray-500 mt-2">Please provide details about your incident to start the process.</p>
+        </header>
+
+        <form id="claim-form-current" onsubmit="handleClaim(event, 'current')">
+            <div class="space-y-6">
+
+                <!-- 1. Name Field -->
+                <div>
+                    <label for="name-current" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                    <input type="text" id="name-current" placeholder="Jane Doe" required class="w-full border border-gray-300 rounded-lg p-3 focus:ring-cyan-500 focus:border-cyan-500 transition duration-150">
+                </div>
+
+                <!-- 2. Claim Type Dropdown (Original Name) -->
+                <div>
+                    <label for="claim-type-current" class="block text-sm font-medium text-gray-700 mb-1">Claim Type</label>
+                    <select id="claim-type-current" required class="w-full border border-gray-300 rounded-lg p-3 focus:ring-cyan-500 focus:border-cyan-500 transition duration-150">
+                        <option value="">-- Select Claim Category --</option>
+                        <option value="Auto">Auto Damage</option>
+                        <option value="Home">Home Repair</option>
+                        <option value="Health">Health/Medical</option>
+                        <option value="Other">Other Incident</option>
+                    </select>
+                </div>
+
+                <!-- 3. Description Textarea -->
+                <div>
+                    <label for="description-current" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                    <textarea id="description-current" rows="4" placeholder="Briefly describe the incident (who, what, when, where)." required class="w-full border border-gray-300 rounded-lg p-3 focus:ring-cyan-500 focus:border-cyan-500 transition duration-150"></textarea>
+                </div>
+
+                <!-- 4. Upload Input (Original Position) -->
+                <div>
+                    <label for="upload-current" class="block text-sm font-medium text-gray-700 mb-1">Upload Supporting Documents (Optional)</label>
+                    <input type="file" id="upload-current" class="w-full border border-gray-300 rounded-lg p-3 bg-gray-50 focus:ring-cyan-500 focus:border-cyan-500 transition duration-150">
+                    <p class="text-xs text-gray-500 mt-1">Photos, police reports, or medical documents.</p>
+                </div>
+
+                <!-- CTA: Submit Claim (Original Text) -->
+                <div class="pt-4">
+                    <button type="submit" class="w-full bg-cyan-600 text-white font-bold py-3 rounded-xl text-lg hover:bg-cyan-700 transition duration-200 shadow-lg">
+                        Submit Claim
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Confirmation Modal -->
+        <div id="confirmation-modal-current" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden items-center justify-center p-4 transition-opacity duration-300" onclick="closeModal('current')">
+            <div class="bg-white p-8 rounded-xl shadow-2xl max-w-sm w-full transform scale-95 transition-transform duration-300" onclick="event.stopPropagation()">
+                <h3 class="text-2xl font-bold text-green-600 mb-4">Claim Submitted!</h3>
+                <p class="text-gray-700 mb-6">Your claim has been successfully logged. A representative will contact you shortly.</p>
+                <button onclick="closeModal('current')" class="w-full bg-cyan-600 text-white font-semibold py-3 rounded-lg hover:bg-cyan-700">Acknowledge</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleClaim(event, suffix) {
+            event.preventDefault();
+            
+            const name = document.getElementById(`name-${suffix}`).value;
+            const type = document.getElementById(suffix === 'current' ? 'claim-type-current' : 'incident-type-changed').value;
+            const description = document.getElementById(`description-${suffix}`).value;
+            const upload = document.getElementById(`upload-${suffix}`).files.length > 0 ? `${document.getElementById(`upload-${suffix}`).files.length} file(s)` : 'None';
+
+            console.log("--- Claim Submission (Fake) ---");
+            console.log(`Name: ${name}`);
+            console.log(`Type: ${type}`);
+            console.log(`Files: ${upload}`);
+            
+            // Show the confirmation modal
+            const modal = document.getElementById(`confirmation-modal-${suffix}`);
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            document.getElementById(`claim-form-${suffix}`).reset();
+        }
+        
+        function closeModal(suffix) {
+            const modal = document.getElementById(`confirmation-modal-${suffix}`);
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+    </script>
+</body>
+</html>
