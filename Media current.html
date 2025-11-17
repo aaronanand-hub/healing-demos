@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Gemini Chronicle - Premium Media Site</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f3f8; /* Lighter blue-grey background */
+        }
+        .article-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border: 1px solid #e2e8f0;
+        }
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.15);
+        }
+        .premium-feature {
+            background-color: #fffbeb; /* Amber-50 */
+            border-color: #fbbf24; /* Amber-400 */
+        }
+        .modal-content {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        /* Custom radio button styles for sophistication */
+        .premium-radio:checked + label {
+            border-color: #4f46e5; /* Indigo-600 */
+            background-color: #eef2ff; /* Indigo-50 */
+            box-shadow: 0 0 0 3px #a5b4fc; /* Indigo-300 ring */
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8 min-h-screen">
+    <div id="app" class="max-w-6xl mx-auto bg-white shadow-2xl rounded-3xl p-6 md:p-12">
+        <header class="flex justify-between items-center mb-10 pb-6 border-b-2 border-indigo-100">
+            <h1 class="text-4xl font-extrabold text-indigo-800 tracking-tight">The Gemini Chronicle</h1>
+            <!-- CTA: Subscribe (Original Text) -->
+            <button onclick="openModal('current')" class="bg-amber-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-amber-600 transition duration-300 shadow-lg transform hover:scale-105">
+                Subscribe
+            </button>
+        </header>
+
+        <!-- Article List (Sophisticated Grid Layout) -->
+        <section>
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Featured Insights</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Featured Article 1 (Large Card) -->
+                <div class="lg:col-span-2 article-card p-6 rounded-xl bg-gray-50 border-2 border-indigo-100">
+                    <span class="text-xs font-semibold uppercase text-indigo-600 tracking-widest">Global Policy</span>
+                    <h3 class="text-3xl font-extrabold text-gray-900 mt-2 mb-3">AI Models Achieve New Creative Heights: The Ethical Implications of Generative Art</h3>
+                    <p class="text-gray-600 text-base mb-4 line-clamp-3">A deep dive into the latest breakthroughs in generative language and image processing, examining the legal, creative, and philosophical challenges posed by autonomous content creation. Experts discuss the future of copyright in a machine-generated world.</p>
+                    <a href="#" class="text-indigo-600 hover:text-indigo-800 text-lg font-bold transition duration-150">Continue Reading &rarr;</a>
+                </div>
+
+                <!-- Article Card 2 -->
+                <div class="article-card p-5 rounded-xl bg-white">
+                    <span class="text-xs font-semibold uppercase text-green-600 tracking-widest">Finance</span>
+                    <h3 class="text-xl font-bold text-gray-900 mt-1 mb-2">Global Markets React to Quantum Computing News</h3>
+                    <p class="text-gray-600 text-sm mb-3 line-clamp-2">How the promise of faster computing is reshaping investment strategies worldwide, causing shifts in tech sector valuations.</p>
+                    <a href="#" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">Read More &rarr;</a>
+                </div>
+
+                <!-- Article Card 3 (Premium Placeholder - Darker Accent) -->
+                <div class="lg:col-span-1 article-card p-5 rounded-xl premium-feature relative">
+                    <span class="absolute top-2 right-2 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">PREMIUM</span>
+                    <span class="text-xs font-semibold uppercase text-amber-700 tracking-widest">Exclusive Research</span>
+                    <h3 class="text-xl font-bold text-amber-900 mt-1 mb-2">The Future of Renewable Energy Funding: A 5-Year Forecast</h3>
+                    <p class="text-amber-700 text-sm mb-3 line-clamp-2">This is premium content. Unlock our in-depth report on emerging clean energy investments and regulatory hurdles by subscribing today.</p>
+                    <button onclick="openModal('current')" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium mt-2">Unlock Now &rarr;</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Subscription Modal (Sophisticated Design) -->
+        <div id="subscription-modal-current" class="fixed inset-0 bg-gray-900 bg-opacity-85 hidden items-center justify-center p-4 z-50 transition-opacity duration-300" onclick="closeModal('current')">
+            <div class="bg-white p-10 rounded-2xl modal-content max-w-xl w-full transform transition-transform duration-300" onclick="event.stopPropagation()">
+                <h3 class="text-3xl font-extrabold text-indigo-700 mb-2">Go Ad-Free. Go Deep.</h3>
+                <p class="text-gray-500 mb-8 border-b pb-4">Unlock unlimited access to our most powerful analysis and data.</p>
+                
+                <form id="subscribe-form-current" onsubmit="handleSubscription(event, 'current')">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <!-- Email Field -->
+                        <div>
+                            <label for="email-current" class="block text-sm font-bold text-gray-700 mb-1">Email Address</label>
+                            <input type="email" id="email-current" placeholder="your@premium.com" required class="w-full border-2 border-gray-300 rounded-lg p-3 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150">
+                        </div>
+                        <!-- Password Field -->
+                        <div>
+                            <label for="password-current" class="block text-sm font-bold text-gray-700 mb-1">Create Password</label>
+                            <input type="password" id="password-current" placeholder="Secure Password" required class="w-full border-2 border-gray-300 rounded-lg p-3 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150">
+                        </div>
+                    </div>
+                    
+                    <!-- Plan Selection (Sophisticated Radio Buttons - Original Requirement) -->
+                    <div class="mb-8">
+                        <label class="block text-lg font-bold text-gray-800 mb-4">Choose Your Premium Plan</label>
+                        <div class="space-y-4">
+                            <!-- Basic Plan -->
+                            <div class="premium-radio-container">
+                                <input id="plan-basic-current" name="plan-current" type="radio" value="Basic" required class="hidden premium-radio">
+                                <label for="plan-basic-current" class="flex justify-between items-center p-4 border-2 border-gray-300 rounded-xl cursor-pointer hover:shadow-md transition duration-150">
+                                    <div>
+                                        <p class="font-bold text-indigo-700">Basic Access</p>
+                                        <p class="text-sm text-gray-500">5 Premium Articles/Month. Ad-Supported.</p>
+                                    </div>
+                                    <span class="text-xl font-extrabold text-gray-900">$9.99<span class="text-sm font-normal text-gray-500">/mo</span></span>
+                                </label>
+                            </div>
+                            <!-- Pro Plan (Highlighted) -->
+                            <div class="premium-radio-container">
+                                <input id="plan-pro-current" name="plan-current" type="radio" value="Pro" class="hidden premium-radio" checked>
+                                <label for="plan-pro-current" class="flex justify-between items-center p-4 border-2 border-indigo-600 rounded-xl cursor-pointer shadow-lg bg-indigo-50 hover:shadow-xl transition duration-150 relative">
+                                    <div class="absolute -top-3 left-4 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">BEST VALUE</div>
+                                    <div>
+                                        <p class="font-bold text-indigo-700">Pro Unlimited</p>
+                                        <p class="text-sm text-gray-500">Unlimited Content. Ad-Free. Early Access.</p>
+                                    </div>
+                                    <span class="text-2xl font-extrabold text-indigo-900">$19.99<span class="text-sm font-normal text-gray-500">/mo</span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CTA: Start Subscription (Original Text) -->
+                    <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-4 rounded-xl text-xl hover:bg-indigo-700 transition duration-300 shadow-2xl">
+                        Start Subscription
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Confirmation Modal -->
+        <div id="confirmation-modal-current" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden items-center justify-center p-4 z-50" onclick="closeConfirmation('current')">
+            <div class="bg-white p-8 rounded-xl shadow-2xl max-w-sm w-full" onclick="event.stopPropagation()">
+                <h3 class="text-2xl font-bold text-green-600 mb-4">Subscription Confirmed!</h3>
+                <p class="text-gray-700 mb-6">Welcome to The Gemini Chronicle Premium. You now have full access!</p>
+                <button onclick="closeConfirmation('current')" class="w-full bg-indigo-600 text-white font-semibold py-3 rounded-lg hover:bg-indigo-700">Explore Articles</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(suffix) {
+            const modal = document.getElementById(`subscription-modal-${suffix}`);
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal(suffix) {
+            const modal = document.getElementById(`subscription-modal-${suffix}`);
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            const form = document.getElementById(`subscribe-form-${suffix}`);
+            if (form) {
+                form.reset();
+            }
+        }
+
+        function handleSubscription(event, suffix) {
+            event.preventDefault();
+            
+            const email = document.getElementById(`email-${suffix}`).value;
+            const password = document.getElementById(`password-${suffix}`).value;
+            
+            let plan;
+            if (suffix === 'current') {
+                plan = document.querySelector('input[name="plan-current"]:checked')?.value || 'N/A';
+            } else {
+                plan = document.getElementById('plan-dropdown-changed').value;
+            }
+
+            console.log("--- Subscription Submission (Fake) ---");
+            console.log(`Email: ${email}`);
+            console.log(`Password (Hashed): ${password.length} characters`);
+            console.log(`Plan: ${plan}`);
+            
+            closeModal(suffix);
+            
+            const confirmationModal = document.getElementById(`confirmation-modal-${suffix}`);
+            confirmationModal.classList.remove('hidden');
+            confirmationModal.classList.add('flex');
+        }
+        
+        function closeConfirmation(suffix) {
+            const confirmationModal = document.getElementById(`confirmation-modal-${suffix}`);
+            confirmationModal.classList.add('hidden');
+            confirmationModal.classList.remove('flex');
+        }
+    </script>
+</body>
+</html>
