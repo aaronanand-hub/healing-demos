@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium E-commerce Checkout (Modified)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f7f9;
+            background-image: url('https://placehold.co/1920x1080/e0e7ff/ffffff?text=Geometric+Pattern'); /* Different subtle background pattern */
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Custom styles for the required wrappers */
+        .promo-banner {
+            background: linear-gradient(135deg, #1f2937, #4b5563); /* Darker, more premium gradient */
+            border: 2px solid #fbbf24; 
+            padding: 1.5rem; /* Increased padding */
+            margin-bottom: 2.5rem; /* Increased margin */
+            border-radius: 20px; /* More rounded */
+            text-align: center;
+            font-weight: 700;
+            color: #fcd34d; /* Amber-300 */
+            box-shadow: 0 12px 25px -5px rgba(0, 0, 0, 0.25); /* Stronger shadow */
+            font-size: 1.25rem; /* Larger font */
+            letter-spacing: 0.05em; /* More spacing */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem; /* Space between text and icon */
+        }
+        .ship-box {
+            border: 3px dashed #6366f1; /* Thicker dashed border */
+            padding: 1.75rem; /* Increased padding */
+            border-radius: 16px; /* More rounded */
+            background-color: #f9fafb; 
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.08); /* Added shadow */
+        }
+        .ship-box:hover {
+            box-shadow: 0 8px 20px -5px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px); /* Slight lift on hover */
+        }
+        .checkout-card {
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.15);
+        }
+        input:focus, textarea:focus, select:focus {
+            --tw-ring-color: #4f46e5 !important;
+        }
+        .icon {
+            width: 28px; /* Slightly larger icons */
+            height: 28px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px; /* More spacing */
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8 min-h-screen">
+    <div id="app" class="max-w-4xl mx-auto bg-white shadow-2xl rounded-3xl p-8 md:p-12 checkout-card">
+        <header class="text-center mb-10 border-b pb-6 border-indigo-200">
+            <h1 class="text-5xl font-extrabold text-gray-800 tracking-tight">The MarketPlace Checkout</h1>
+            <p class="text-gray-500 mt-3 text-lg">Securely completing your modified order flow.</p>
+        </header>
+
+        <!-- UI Change: Promo Banner (Redesigned with icon) --><div class="promo-banner">
+            <img src="https://img.icons8.com/ios-filled/30/fcd34d/discount--v1.png" class="-ml-2" alt="Discount icon">
+            <span>✨ Limited Time Offer: **Free Express Shipping** on orders over $50! ✨</span>
+        </div>
+
+        <!-- Product Section --><section class="mb-10 p-8 border border-gray-100 rounded-xl shadow-md border-b-4 border-indigo-200">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                <img src="https://img.icons8.com/ios-filled/28/4f46e5/shopping-bag.png" class="icon" alt="Shopping bag icon">
+                Review Your Item
+            </h2>
+            <div class="md:flex md:items-center md:space-x-8">
+                <div class="flex-shrink-0 mb-6 md:mb-0 relative group">
+                    <img src="https://placehold.co/200x200/4f46e5/ffffff?text=Sleek+Device" alt="Sleek Modern Device" class="rounded-2xl shadow-xl border-4 border-indigo-100 transform group-hover:scale-105 transition duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 text-white font-semibold">
+                        Gemini Calculator
+                    </div>
+                </div>
+                <div class="flex-grow">
+                    <p class="text-3xl font-semibold text-gray-800 leading-tight">Gemini-Powered Calculator <br> <span class="text-xl text-gray-500">Edition 2024</span></p>
+                    <p class="text-6xl font-extrabold text-green-600 my-4 tracking-tight">$49.99</p>
+                    <p class="text-lg text-gray-600 mb-6">A marvel of modern calculation. Fast, intuitive, and stylish.</p>
+                    <div class="flex items-center space-x-6">
+                        <label for="quantity-changed" class="text-gray-700 font-medium text-lg">Quantity:</label>
+                        <select id="quantity-changed" class="form-select border-2 border-gray-300 rounded-xl p-3 w-24 text-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 bg-white shadow-sm">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                        <!-- UI Change: Button text is "Add Item" --><button onclick="addToCart('Gemini Calculator', 'changed')" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-full hover:bg-indigo-700 transition duration-300 shadow-xl transform hover:scale-105 text-lg flex items-center">
+                            <img src="https://img.icons8.com/ios-filled/28/ffffff/add-shopping-cart.png" class="icon -ml-1" alt="Add to cart icon">
+                            Add Item
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cart/Message Section --><div id="cart-message-changed" class="text-center mb-8 hidden p-5 bg-amber-50 rounded-xl border border-amber-300 shadow-inner flex items-center justify-center space-x-3">
+            <img src="https://img.icons8.com/ios-filled/28/e3a008/checked--v1.png" class="icon" alt="Checkmark icon">
+            <p class="text-amber-800 font-semibold text-lg">Item added to cart! Proceed to Checkout below.</p>
+        </div>
+
+        <!-- Checkout Form Section --><section>
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 flex items-center">
+                <img src="https://img.icons8.com/ios-filled/28/4f46e5/delivery.png" class="icon" alt="Delivery truck icon">
+                Delivery and Contact Details
+            </h2>
+            <form id="checkout-form-changed" onsubmit="handleCheckout(event, 'changed')">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                    <!-- UI Change: Address Field (Modified Position: First) --><div>
+                        <label for="address-changed" class="block text-lg font-bold text-gray-700 mb-3">Shipping Address</label>
+                        <textarea id="address-changed" rows="4" placeholder="123 Fake Street, City, Country, ZIP" required class="w-full border-2 border-gray-300 rounded-xl p-4 text-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm"></textarea>
+                    </div>
+
+                    <!-- UI Change: Email Field (Modified Position: Second) --><div>
+                        <label for="email-changed" class="block text-lg font-bold text-gray-700 mb-3">Contact Email</label>
+                        <input type="email" id="email-changed" placeholder="you@example.com" required class="w-full border-2 border-gray-300 rounded-xl p-4 text-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm">
+                    </div>
+
+                    <!-- UI Change: Shipping Option Dropdown wrapped in .ship-box (with icon) --><div class="col-span-full mt-4">
+                        <label class="block text-lg font-bold text-gray-700 mb-4 flex items-center">
+                            <img src="https://img.icons8.com/ios-filled/28/4f46e5/shipping-fast.png" class="icon" alt="Fast shipping icon">
+                            Shipping Option (Choose Speed)
+                        </label>
+                        <div class="ship-box">
+                            <select id="shipping-changed" required class="w-full border border-indigo-300 rounded-xl p-4 text-lg text-gray-800 focus:ring-indigo-500 focus:border-indigo-500 bg-white transition duration-150 shadow-sm">
+                                <option value="">Select a shipping method</option>
+                                <option value="standard">Standard Shipping (5-7 days) - $5.00</option>
+                                <option value="express">Express Shipping (1-2 days) - $15.00</option>
+                            </select>
+                            <p class="text-sm text-indigo-700 mt-3 font-medium flex items-center">
+                                <img src="https://img.icons8.com/ios-filled/20/6366f1/info--v1.png" class="icon !w-5 !h-5 !mr-2" alt="Info icon">
+                                Shipment will be tracked via email updates.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- CTA --><div class="col-span-full mt-10">
+                        <button type="submit" class="w-full bg-green-600 text-white font-extrabold py-5 rounded-xl text-2xl hover:bg-green-700 transition duration-300 shadow-2xl transform hover:scale-[1.01] flex items-center justify-center space-x-3">
+                            <img src="https://img.icons8.com/ios-filled/28/ffffff/checked-checkbox--v1.png" class="icon -ml-2" alt="Checkout icon">
+                            Place Order
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <!-- Modal/Confirmation Box --><div id="confirmation-modal-changed" class="fixed inset-0 bg-gray-900 bg-opacity-80 hidden items-center justify-center p-4 transition-opacity duration-300" onclick="closeModal('changed')">
+            <div class="bg-white p-10 rounded-2xl shadow-3xl max-w-sm w-full transform scale-100 transition-transform duration-300" onclick="event.stopPropagation()">
+                <img src="https://img.icons8.com/ios-filled/64/22c55e/checked-checkbox--v1.png" class="mx-auto mb-4" alt="Success checkmark">
+                <h3 class="text-3xl font-bold text-gray-800 text-center mb-3">Order Confirmed!</h3>
+                <p class="text-gray-500 text-center mb-6 text-lg">Your transaction is complete. A confirmation email is on its way.</p>
+                <button onclick="closeModal('changed')" class="w-full bg-indigo-600 text-white font-semibold py-3 rounded-xl hover:bg-indigo-700 transition duration-200 text-lg">View Order Details</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function addToCart(productName, suffix) {
+            const quantity = document.getElementById(`quantity-${suffix}`).value;
+            console.log(`Faking: Added ${quantity} of ${productName} to cart.`);
+            
+            const messageBox = document.getElementById(`cart-message-${suffix}`);
+            messageBox.classList.remove('hidden');
+            
+            setTimeout(() => messageBox.classList.add('hidden'), 3000);
+        }
+
+        function handleCheckout(event, suffix) {
+            event.preventDefault();
+            
+            const email = document.getElementById(`email-${suffix}`).value;
+            const address = document.getElementById(`address-${suffix}`).value;
+            const shipping = document.getElementById(`shipping-${suffix}`).value;
+
+            console.log("--- Checkout Submission (Fake) ---");
+            console.log(`Email: ${email}`);
+            console.log(`Address: ${address}`);
+            console.log(`Shipping: ${shipping}`);
+            
+            const modal = document.getElementById(`confirmation-modal-${suffix}`);
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+        
+        function closeModal(suffix) {
+            const modal = document.getElementById(`confirmation-modal-${suffix}`);
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            
+            document.getElementById(`checkout-form-${suffix}`).reset();
+        }
+    </script>
+</body>
+</html>
